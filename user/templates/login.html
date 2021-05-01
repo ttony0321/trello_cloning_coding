@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load humanize %}{# 필터 사용 #}
+{% block contents %}
+    <div class="display-container">
+        <div class="header-container">
+            <div class="header-wrapper">
+                <div class="left_logo">
+                    <a href="#" class="search-btn">
+                        <span class="search-icon">
+                            <span class="icons">
+                                <span class="material-icons" id=search>
+                                    search
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                    <a href="#" class="search-btn">
+                        <span class="search-icon">
+                            <span class="icons">
+                                <span class="material-icons">
+                                    title
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                    <div class="title-box">
+                        <h1 class="title-wrapper">
+                            TestTitle
+                        </h1>
+                        <input class="title-input" dir="auto" maxlength="512" value="TestTitle" aria-label="TestTitle">
+                    </div>
+                    <div class="unused-space">
+                    </div>
+                </div>
+                <a class="logo">
+                    <div class="logo-wrapper">
+                        <span class="logo-text logo-turn" onclick="location.href='/'">Scheduler</span>
+                    </div>
+                </a>
+                <div class="right-logo">
+                    <a href="#" class="search-btn">
+                        <span class="search-icon">
+                            <span class="icons">
+                                <span class="material-icons">
+                                    login
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                    <a href="#" class="search-btn">
+                        <span class="search-icon">
+                            <span class="icons">
+                                <span class="material-icons">
+                                    account_circle
+                                </span>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <main class="main-boundary">
+            <div class="content">
+                <div class="content-wrapper">
+                    <div class="main-content">
+                        <div class="list-card-board">
+                            <div>
+                                <fieldset class="Login-form">
+                                    <div class="row mt-5">
+                                        <div class="col-12 text-center">
+                                            {{ error }}
+                                            <h1>Login</h1>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-5" id="Login-buttom">
+                                        <div class="col-12">
+                                            <form method="POST" action=".">
+                                                <div class="form-group">
+                                                    {% csrf_token %}
+                                                    {% for field in form %}
+                                                        <label for="{{ field.id_for_label }}"
+                                                               class="userids">{{ field.label }}</label>
+                                                        <input
+                                                                type="{{ field.field.widget.input_type }}"
+                                                                class="form-control"
+                                                                id="{{ field.id_for_label }}"
+                                                                placeholder="{{ field.label }}"
+                                                                name="{{ field.name }}"
+                                                        />
+                                                        </div>
+                                                        {% if field.errors %}
+                                                            <span style="color:red">{{ field.errors }}</span>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                            </form>
+                                            <!--                    <button type="button" class="btn btn-primary" id="login-btn">Login</button>-->
+                                            <div class="Log-btn">
+                                                <button type="submit" class="btn btn-outline-primary" id="Login-btn"
+                                                        onclick="login()">
+                                                    로그인
+                                                </button>
+                                                <button type="button" class="btn btn-outline-primary" id="Signin-btn"
+                                                        onclick="location.href='/register'">
+                                                    회원가입
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+{% endblock %}
